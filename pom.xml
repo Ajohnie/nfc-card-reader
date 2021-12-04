@@ -26,6 +26,7 @@
         <firebase.version>8.1.0</firebase.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.2</junit.version>
+        <slf4j.version>1.7.32</slf4j.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -39,6 +40,12 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <!--fix slf4j not found error-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.google.firebase</groupId>
             <artifactId>firebase-admin</artifactId>

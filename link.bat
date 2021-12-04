@@ -18,7 +18,7 @@ rem "C:Pserver\api\JAVA_PROJECTS\nfc-card-reader\target\jre"
 SET OUTPUT_PATH=--output target\jre
 SET LINK_OPTIONS= --no-header-files --no-man-pages --compress=2 --strip-debug
 rem get link modules after running %ACTION_DEP%
-SET LINK_MODULES= --add-modules  java.base,javafx.controls,javafx.fxml,javafx.graphics
+SET LINK_MODULES= --add-modules  java.base,javafx.controls,javafx.fxml,javafx.graphics,java.logging
 rem SET ACTION_LINK=jlink %LINK_OPTIONS% %LINK_MODULES% %OUTPUT_PATH% --module-path %MODULE_PATH%
 SET ACTION_LINK=jlink %LINK_OPTIONS% %LINK_MODULES% %OUTPUT_PATH%
 

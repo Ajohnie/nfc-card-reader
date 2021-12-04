@@ -1,5 +1,5 @@
   ## NFC CARD READER CONTROLLER
-- This a javafx program that reads the ACR122U-A9 NFC card reader and updates firebase firestore
+- This a javafx app that reads the ACR122U-A9 NFC card reader and updates firebase firestore
 - It is meant to be a utility application to help web apps access the NFC card reader from a Windows PC
 - USB access is blocked from the web browser and NFC is not supported either except on android 
 - I built this app from the [JAVAFX app template](https://github.com/Ajohnie/nfc-card-reader)
@@ -25,9 +25,10 @@ Installing
   
 Building An Executable App
 ----------
-- Replace the paths in the batch files with paths from your own file system i.e where the project is located 
+- Replace the paths in the batch files with paths from your own file system i.e where the project is located
 - Rub pack.bat to create jar file for your app
 - Run link.bat(look at this file for more details) with OPTION 2 to create a custom runtime image
+- execute run-jar.bat and make sure the app runs before packaging it
 - Run image.bat(look at this file for more details) to create an executable file for your app
 
 TODO
