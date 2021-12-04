@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.font.MFXFontIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ripplesolutions.nfc.cardreader.NfcController">
+   <top>
+      <VBox alignment="CENTER" prefHeight="220.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="581.0" VBox.vgrow="NEVER">
+               <children>
+                  <HBox prefHeight="40.0" prefWidth="295.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fill="STEELBLUE" strokeType="OUTSIDE" strokeWidth="0.0" text="RIPPLE SOLUTIONS" textAlignment="CENTER" />
+                        <Label text="© 2021" textFill="STEELBLUE" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="40.0" prefWidth="232.0" visible="false">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NFC CONTROLLER" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" prefHeight="9.0" prefWidth="118.0" visible="false">
+                     <children>
+                        <JFXButton fx:id="minimizeBtn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" graphicTextGap="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-radius: 40;" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <graphic>
+                              <MFXFontIcon description="mfx-minus" selectionFill="#c95c5c" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="cancelBtn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" graphicTextGap="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-radius: 40;" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <graphic>
+                              <MFXFontIcon description="mfx-x" selectionFill="#c95c5c" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <GridPane VBox.vgrow="ALWAYS">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="173.0" />
+                            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="120.0" text="BRANCH" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label fx:id="branchName" alignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <Label prefHeight="17.0" prefWidth="120.0" text="READER NAME" GridPane.rowIndex="1" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label fx:id="readerName" wrapText="true" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" HBox.hgrow="NEVER">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="120.0" text="STATUS/REFRESH" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <JFXButton fx:id="startStopBtn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" graphicTextGap="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" ripplerFill="#c3bebe" style="-fx-background-radius: 100;" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <graphic>
+                              <MFXFontIcon fx:id="startStopIcon" description="mfx-sync-light" size="70.0" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="580.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="67.0" prefWidth="580.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="BOTTOM_CENTER" HBox.hgrow="NEVER">
+                           <children>
+                              <JFXButton fx:id="exitBtn" alignment="CENTER" buttonType="RAISED" prefHeight="25.0" prefWidth="100.0" ripplerFill="#ccd7d1" style="-fx-border-color: black;" text="EXIT" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <Text fx:id="statusText" fill="#f50606" lineSpacing="0.5" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="577.8867236375809" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Text>
+                  <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" minHeight="9.0" VBox.vgrow="NEVER">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ProgressBar>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+</BorderPane>

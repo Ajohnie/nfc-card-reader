@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven 3.6.3
+Built-By: Akankwatsa Johnson
+Implementation-Vendor: Ripple Solutions(www.eripplesolutions.com)
+Implementation-Title: NFC card reader controller
+Implementation-Version: 1.0
+Main-Class: com.ripplesolutions.nfc.cardreader.Main
+JavaFX-Version: 17.0.1
+Build-Jdk: 17.0.1
+
+
+
