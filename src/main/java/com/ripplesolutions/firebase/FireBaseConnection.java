@@ -1,5 +1,6 @@
 package com.ripplesolutions.firebase;
 
+import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
@@ -10,7 +11,9 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.ripplesolutions.utils.Utils;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.Future;
 
@@ -19,6 +22,7 @@ public class FireBaseConnection {
     private final String dataBaseName;
     private Firestore db;
     private String collectionName;
+    private GoogleCredentials credentials;
 
     /*pass arguments to customize connection*/
     public FireBaseConnection(String databaseName) throws Exception {
@@ -31,7 +35,7 @@ public class FireBaseConnection {
             throw new Exception("Set Service Account Key");
         }
         try {
-            GoogleCredentials credentials = GoogleCredentials.fromStream(accountKey);
+            credentials = GoogleCredentials.fromStream(accountKey);
             FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(credentials).build();
             FirebaseApp app = FirebaseApp.initializeApp(options);
             db = FirestoreClient.getFirestore(app);
@@ -40,10 +44,27 @@ public class FireBaseConnection {
         }
     }
 
-    public Firestore getDb() {
+    public void refreshConnection() throws IOException {
+        if (credentials != null) {
+            AccessToken accessToken = credentials.getAccessToken();
+            // token is null using current auth scheme
+            if (accessToken != null) {
+                Date expirationTime = accessToken.getExpirationTime();
+                boolean tokenExpired = (new Date()).after(expirationTime);
+                if (tokenExpired) {
+                    throw new IOException("Sever connection expired, Restart Application");
+                }
+            }
+        } else {
+            throw new IOException("Server Config Error !");
+        }
+    }
+
+    public Firestore getDb() throws IOException {
         if (db == null) {
             return FirestoreClient.getFirestore();
         }
+        refreshConnection();
         return db;
     }
 
@@ -51,16 +72,16 @@ public class FireBaseConnection {
         this.collectionName = collectionName;
     }
 
-    public DocumentReference observerDoc(String collectionName, String docName) {
+    public DocumentReference observerDoc(String collectionName, String docName) throws IOException {
         this.collectionName = collectionName;
         return getCollection(collectionName).document(docName);
     }
 
-    public DocumentReference observerDoc(String docName) {
+    public DocumentReference observerDoc(String docName) throws IOException {
         return observerDoc(this.collectionName, docName);
     }
 
-    public Future<DocumentReference> addDoc(Object data) {
+    public Future<DocumentReference> addDoc(Object data) throws IOException {
         return getCollection(this.collectionName).add(data);
     }
 
@@ -72,11 +93,11 @@ public class FireBaseConnection {
         return getCollection(this.collectionName).document(docId).set(data);
     }
 
-    private CollectionReference getCollection(String collection) {
+    private CollectionReference getCollection(String collection) throws IOException {
         return getDoc().collection(collection);
     }
 
-    private DocumentReference getDoc() {
+    private DocumentReference getDoc() throws IOException {
         return getDb().collection("databases").document(dataBaseName);
     }
 }

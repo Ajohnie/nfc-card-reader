@@ -1,12 +1,14 @@
 package com.ripplesolutions.nfc.cardreader;
 
 import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
 import com.jfoenix.controls.JFXButton;
+import com.ripplesolutions.firebase.CardOptions;
 import com.ripplesolutions.firebase.FireBaseConnection;
 import com.ripplesolutions.nfc.NFC;
 import com.ripplesolutions.utils.Utils;
 import io.github.palexdev.materialfx.font.MFXFontIcon;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -16,8 +18,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class NfcController implements Initializable {
@@ -25,6 +25,13 @@ public class NfcController implements Initializable {
     private static final String DATA_BASE_NAME = "vag";
     private static final String CARD_COL_NAME = "loyalty-programs";
     private static final String CARD_DOC_ID = "loyalty-program-" + BRANCH;
+    private static final String COLOR_CARD_PRESENT = "green";
+    private static final String COLOR_CARD_ABSENT = "#c5a70d";
+    private static final String COLOR_READER_ABSENT = "black";
+    // added this to allow non-main thread messages to be shown
+    private final SimpleStringProperty appMessagesProperty = new SimpleStringProperty("");
+    private final SimpleStringProperty readerNameProperty = new SimpleStringProperty("");
+    private final SimpleStringProperty startStopIconColorProperty = new SimpleStringProperty("");
     private FireBaseConnection connection;
     @FXML
     private Text statusText;
@@ -44,13 +51,15 @@ public class NfcController implements Initializable {
     }
 
     private void setStatusText(String message) {
-        if (message == null) {
-            statusText.setText("");
-            statusText.setVisible(false);
-        } else {
-            statusText.setText(message);
-            statusText.setVisible(message.length() > 0);
-        }
+        runLater(() -> {
+            if (message == null) {
+                statusText.setText("");
+                statusText.setVisible(false);
+            } else {
+                statusText.setText(message);
+                statusText.setVisible(message.length() > 0);
+            }
+        });
     }
 
     @Override
@@ -62,6 +71,10 @@ public class NfcController implements Initializable {
         minimizeBtn.setOnAction(event -> ((Stage) minimizeBtn.getScene().getWindow()).setIconified(true));
         exitBtn.setOnAction(event -> System.exit(0));
         startStopBtn.setOnAction(event -> checkServer());
+        appMessagesProperty.addListener((observable, oldValue, newValue) -> setStatusText(newValue));
+        readerNameProperty.addListener((observable, oldValue, newValue) -> runLater(() -> readerName.setText(newValue)));
+        startStopIconColorProperty.addListener((observable, oldValue, newValue) -> runLater(() -> startStopIcon.setFill(Paint.valueOf(newValue))));
+
         try {
             connection = new FireBaseConnection(DATA_BASE_NAME); // pass arguments to customize connection in future
             connection.setCollectionName(CARD_COL_NAME);
@@ -69,6 +82,10 @@ public class NfcController implements Initializable {
         } catch (Exception e) {
             setStatusText(e);
         }
+    }
+
+    private void runLater(Runnable action) {
+        Platform.runLater(action);
     }
 
     private void checkServer() {
@@ -102,13 +119,13 @@ public class NfcController implements Initializable {
                                 boolean idIsSet = options.customerId != null && options.customerId.length() > 0;
                                 if (idIsSet) {
                                     Utils.setCustomerId(options.customerId);
-                                    checkReaderStatus(); // update ui with card reader name
                                 } else {
                                     options.message = "Customer ID unknown, register customer and try again";
                                     setStatusText(options.message);
                                     connection.editDoc(CARD_DOC_ID, options.toFirebase());
                                 }
                             }
+                            checkReaderStatus(); // update ui with card reader name
                         } catch (Exception ex) {
                             setStatusText(ex);
                         }
@@ -143,86 +160,17 @@ public class NfcController implements Initializable {
     }
 
     private void checkReaderStatus() {
-        readerName.setText(NFC.readerName);
+        readerNameProperty.setValue(NFC.readerName);
         boolean readerPresent = NFC.readerPluggedIn;
         if (!readerPresent) {
-            startStopIcon.setFill(Paint.valueOf("black"));
+            startStopIconColorProperty.setValue(COLOR_READER_ABSENT);
             return;
         }
         boolean cardPresent = NFC.cardInRange;
         if (cardPresent) {
-            startStopIcon.setFill(Paint.valueOf("green"));
+            startStopIconColorProperty.setValue(COLOR_CARD_PRESENT);
         } else {
-            startStopIcon.setFill(Paint.valueOf("#c5a70d"));
-        }
-    }
-
-    static class CardOptions {
-        String customerId;
-        String branch;
-        String functionName;
-        String operation;
-        String message;
-
-        public CardOptions(String customerId, String branch, String functionName) {
-            this.customerId = customerId;
-            this.branch = branch;
-            this.functionName = functionName;
-            this.operation = "WRITE";
-            this.message = "";
-        }
-
-        public CardOptions(String customerId,
-                           String branch,
-                           String functionName,
-                           String operation,
-                           String message) {
-            this.customerId = customerId;
-            this.branch = branch;
-            this.functionName = functionName;
-            this.operation = operation;
-            this.message = message;
-        }
-
-        public CardOptions() {
-            this.customerId = "";
-            this.branch = "";
-            this.functionName = "";
-            this.operation = "READ";
-            this.message = "";
-        }
-
-        boolean isRead() {
-            if (this.operation == null) {
-                return true; // read by default
-            }
-            return this.operation.equalsIgnoreCase("READ");
-        }
-
-        boolean isWrite() {
-            if (this.operation == null) {
-                return false; // don't overwrite useful data in case of wrong object set up
-            }
-            return this.operation.equalsIgnoreCase("WRITE");
-        }
-
-        public Map<String, Object> toFirebase() {
-            Map<String, Object> map = new HashMap<>();
-            map.put("customerId", customerId);
-            map.put("branch", branch);
-            map.put("functionName", functionName);
-            map.put("operation", operation);
-            map.put("message", message);
-            return map;
-        }
-
-        public CardOptions fromFirebase(DocumentSnapshot snapshot) {
-            customerId = snapshot.getString("customerId");
-            branch = snapshot.getString("branch");
-            functionName = snapshot.getString("functionName");
-            operation = snapshot.getString("operation");
-            message = snapshot.getString("message");
-            return this;
+            startStopIconColorProperty.setValue(COLOR_CARD_ABSENT);
         }
     }
 }

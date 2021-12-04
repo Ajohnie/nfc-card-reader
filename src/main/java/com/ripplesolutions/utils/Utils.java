@@ -4,7 +4,7 @@ import com.ripplesolutions.nfc.NFC;
 
 public final class Utils {
     public static String getExceptionMessage(Exception exception) {
-        // exception.printStackTrace();
+        exception.printStackTrace();
         // get last part of the exception message
         String rawMessage = exception.getMessage().toLowerCase();
         boolean isOfflineMessage = rawMessage.contains("unavailable");
@@ -12,7 +12,7 @@ public final class Utils {
         to experience unexpected exceptions*/
         if (isOfflineMessage) {
             // System.out.println("rawMessage: " + rawMessage);
-            return "Server is Unreachable, Check your internet connection";
+            return "Server is Unreachable, Check your internet connection and click refresh";
         }
         // exception messages usually go like ....blah blah...:message
         int startIndex = rawMessage.lastIndexOf(":");

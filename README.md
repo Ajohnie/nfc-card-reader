@@ -30,8 +30,11 @@ Building An Executable App
 - Run link.bat(look at this file for more details) with OPTION 2 to create a custom runtime image
 - execute run-jar.bat and make sure the app runs before packaging it
 - Run image.bat(look at this file for more details) to create an executable file for your app
+- Depending on the firebase authentication scheme you use, you might need to [register the application in firebase](https://console.cloud.google.com/apis/credentials)
 
 TODO
 ----------
 - Replace the actions performed by the batch scripts with maven equivalents
 - clean up unused classes and reduce bundle size
+- Connection to firebase expires after a while,
+- Implement firebase authentication scheme that enables refreshing connection to firebase
