@@ -32,4 +32,4 @@ Building Executable App
 TODO
 =============
 - Replace the actions performed by the batch scripts with maven equivalents
-- clean up used classes and reduce bundle size
+- clean up unused classes and reduce bundle size
