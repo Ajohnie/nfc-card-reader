@@ -19,6 +19,9 @@ Installing
   - git clone http://github.com/Ajohnie/nfc-card-reader
   - type cd nfc-card-reader
   - run mvn install
+  - You will need a service account key for the app to connect to firebase
+  - get it from here https://console.firebase.google.com/project/YOUR_PROJECT/settings/serviceaccounts/adminsdk
+  - then copy its contents and paste them in a file named  serviceAccountKey.json under src/main/resources directory
   
 Building Executable App
 ----------
