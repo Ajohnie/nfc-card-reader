@@ -1,5 +1,5 @@
 @echo off
-cd C:PServer\api\JAVA_PROJECTS\nfc-card-reader
+cd C:Pserver\api\JAVA_PROJECTS\nfc-card-reader
 SET JAR_FILE=target\nfc-card-reader-1.0-SNAPSHOT-jar-with-dependencies.jar
 rem use javafx version in your pom and runtime config
 SET ALL_MODULE_PATH="C:\Program Files\BellSoft\LibericaNIK-Full-21-OpenJDK-17\jmods"
@@ -14,7 +14,7 @@ rem this file is relative to the paths specified
 SET MODULE_PATH=target\jre\lib-deps
 SET COPY_MODULES=Xcopy /E /I %ALL_MODULE_PATH% %MODULE_PATH%
 
-rem "C:PServer\api\JAVA_PROJECTS\nfc-card-reader\target\jre"
+rem "C:Pserver\api\JAVA_PROJECTS\nfc-card-reader\target\jre"
 SET OUTPUT_PATH=--output target\jre
 SET LINK_OPTIONS= --no-header-files --no-man-pages --compress=2 --strip-debug
 rem get link modules after running %ACTION_DEP%

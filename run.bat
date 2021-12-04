@@ -1,3 +1,3 @@
 @echo off
-cd C:PServer\api\JAVA_PROJECTS\Launcher
+cd C:Pserver\api\JAVA_PROJECTS\nfc-card-reader
 mvn clean javafx:run

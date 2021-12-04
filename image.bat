@@ -1,5 +1,5 @@
 @echo off
-cd C:PServer\api\JAVA_PROJECTS\nfc-card-reader
+cd C:Pserver\api\JAVA_PROJECTS\nfc-card-reader
 rem no need for input dir for now, but you can put files to be shipped with the app bundle there
 rem like additional jar files etc
 SET INPUT_DIR="target\inputs"
@@ -8,21 +8,21 @@ SET JRE_DIR="target\jre"
 SET APP_NAME="nfc-card-reader"
 SET MAIN_JAR_PATH="target"
 SET MAIN_JAR="nfc-card-reader-1.0-SNAPSHOT-jar-with-dependencies.jar"
-SET MAIN_CLASS="com.example.nfc-card-reader.HelloApplication"
+SET MAIN_CLASS="com.ripplesolutions.nfc.cardreader.Main"
 SET MODULE_PATH="%JAVA_HOME%/jmods"
 SET APP_MODULES=java.base,javafx.controls,javafx.graphics,java.datatransfer,java.desktop,java.scripting,java.xml
 rem -Xmx2048m
 SET JAVA_OPTIONS=""
-SET APP_DESCRIPTION="demo javafx app"
+SET APP_DESCRIPTION="nfc card reader controller"
 SET APP_COPYRIGHT="© 2021 ripple solutions"
 SET APP_VERSION="1.0"
 SET APP_TYPE="exe"
 SET ABOUT_URL="https://github.com/Ajohnie/nfc-card-reader"
 rem get UUID form https://www.uuidgenerator.net/
-SET APP_UUID="fbff31d4-0729-4bdf-aa68-576bb3bf966b"
+SET APP_UUID="411b2ceb-723f-4d70-b597-de3eea30de0b"
 SET APP_UPDATE_URL="https://github.com/Ajohnie/nfc-card-reader"
 SET APP_INSTALL_DIR=%APP_NAME%
-SET APP_LICENSE_FILE="C:PServer\license.rtf"
+SET APP_LICENSE_FILE="C:Pserver\license.rtf"
 SET APP_RESOURCE_DIR="src/main/resources"
 SET APP_MENU_GROUP="Ripple Solutions"
 SET APP_ICON="%APP_RESOURCE_DIR%\icons\256x256.ico"
