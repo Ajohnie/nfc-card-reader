@@ -22,7 +22,7 @@ rem get UUID form https://www.uuidgenerator.net/
 SET APP_UUID="411b2ceb-723f-4d70-b597-de3eea30de0b"
 SET APP_UPDATE_URL="https://github.com/Ajohnie/nfc-card-reader"
 SET APP_INSTALL_DIR=%APP_NAME%
-SET APP_LICENSE_FILE="C:Pserver\license.rtf"
+SET APP_LICENSE_FILE="license.rtf"
 SET APP_RESOURCE_DIR="src/main/resources"
 SET APP_MENU_GROUP="Ripple Solutions"
 SET APP_ICON="%APP_RESOURCE_DIR%\icons\256x256.ico"
