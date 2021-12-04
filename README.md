@@ -2,7 +2,7 @@
 - This a javafx program that reads the ACR122U-A9 NFC card reader and updates firebase firestore
 - It is meant to be a utility application to help web apps access the NFC card reader from a Windows PC
 - USB access is blocked from the web browser and NFC is not supported either except on android 
-- I build this app from the [JAVAFX app template](https://github.com/Ajohnie/demofx)
+- I built this app from the [JAVAFX app template](https://github.com/Ajohnie/demofx)
 
 Installing
 ----------
