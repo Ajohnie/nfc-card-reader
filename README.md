@@ -30,6 +30,6 @@ Building An Executable App
 - Run image.bat(look at this file for more details) to create an executable file for your app
 
 TODO
-=============
+----------
 - Replace the actions performed by the batch scripts with maven equivalents
 - clean up unused classes and reduce bundle size
