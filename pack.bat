@@ -1,3 +1,3 @@
 @echo off
-cd C:PlServer\api\JAVA_PROJECTS\demofx
+cd C:PServer\api\JAVA_PROJECTS\nfc-card-reader
 mvn clean compile assembly:single
