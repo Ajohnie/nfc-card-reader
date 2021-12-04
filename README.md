@@ -23,7 +23,7 @@ Installing
   - get it from here https://console.firebase.google.com/project/YOUR_PROJECT/settings/serviceaccounts/adminsdk
   - then copy its contents and paste them in a file named  serviceAccountKey.json under src/main/resources directory
   
-Building Executable App
+Building An Executable App
 ----------
 - Rub pack.bat to create jar file for your app
 - Run link.bat(look at this file for more details) with OPTION 2 to create a custom runtime image
