@@ -64,7 +64,6 @@ public class NfcController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // MFXFontIcon xIcon = new MFXFontIcon("mfx-x-circle", 16);
         branchName.setText(BRANCH.replace("_", " "));
         readerName.setText("");
         cancelBtn.setOnAction(event -> System.exit(0));
