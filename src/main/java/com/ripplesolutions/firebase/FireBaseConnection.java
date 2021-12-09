@@ -10,7 +10,6 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.ripplesolutions.utils.Utils;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -18,7 +17,8 @@ import java.util.Map;
 import java.util.concurrent.Future;
 
 public class FireBaseConnection {
-    private static final String SERVICE_ACCOUNT_KEY_PATH = "serviceAccountKey.json";
+    // private static final String SERVICE_ACCOUNT_KEY_PATH = "serviceAccountKey.json";
+    private static final String SERVICE_ACCOUNT_KEY_PATH = "serviceAccountKey-dev.json";
     private final String dataBaseName;
     private Firestore db;
     private String collectionName;

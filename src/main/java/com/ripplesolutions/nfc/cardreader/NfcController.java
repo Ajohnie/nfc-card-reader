@@ -18,9 +18,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class NfcController implements Initializable {
+    // private static final String BRANCH = "MAKINDYE";
     private static final String BRANCH = "KIRA_RD";
     private static final String DATA_BASE_NAME = "vag";
     private static final String CARD_COL_NAME = "loyalty-programs";
@@ -93,45 +95,67 @@ public class NfcController implements Initializable {
             setStatusText(""); // reset message panel
             if (connection != null) {
                 DocumentReference document = connection.observerDoc(CARD_DOC_ID);
+                /*the program goes into a read/write listen loop and
+                 * behaves unexpectedly, so I introduced buildNo's to know
+                 * who made the changes to the firebase document*/
+                CardOptions options = new CardOptions();
+                options.branch = BRANCH;
+                Date buildNo = new Date();
+                options.setModified(buildNo);
                 document.addSnapshotListener((snapshot, e) -> {
-                    hideProgressBar();
-                    if (e != null) {
-                        setStatusText(e);
-                        return;
-                    }
                     boolean configExists = snapshot != null && snapshot.exists();
+                    CardOptions newOptions = new CardOptions().fromFirebase(snapshot);
                     if (configExists) {
-                        try {
-                            CardOptions options = new CardOptions().fromFirebase(snapshot);
-                            if (options.isRead()) {
-                                options.customerId = Utils.getCustomerId();
-                                checkReaderStatus(); // update ui with card reader name
-                                boolean cardHasId = options.customerId.length() > 0;
-                                if (cardHasId) {
-                                    options.message = "Customer Id has been read successfully";
+                        if (options.wasModified(newOptions.getModified())) {
+                            options.fromFirebase(snapshot);
+                            try {
+                                boolean cardHasId = options.hasId();
+                                if (options.isRead()) {
+                                    options.setCustomerId(Utils.getCustomerId());
+                                    checkReaderStatus(); // update ui with card reader name
+                                    cardHasId = options.hasId(); // check id again
+                                    if (cardHasId) {
+                                        options.setModified(buildNo); // mark as updated
+                                        options.message = "Customer Id has been read successfully";
+                                        options.write(); // change operation so that it is detected by web app
+                                    } else {
+                                        options.message = "Card is not registered, register card and try again";
+                                        setStatusText(options.message);
+                                    }
+                                    connection.editDoc(CARD_DOC_ID, options.toFirebase());
                                 } else {
-                                    options.message = "Card is not registered, register card and try again";
-                                    setStatusText(options.message);
-                                }
-                                connection.editDoc(CARD_DOC_ID, options.toFirebase());
-                            } else {
-                                boolean idIsSet = options.customerId != null && options.customerId.length() > 0;
-                                if (idIsSet) {
-                                    Utils.setCustomerId(options.customerId);
-                                } else {
-                                    options.message = "Customer ID unknown, register customer and try again";
+                                    if (cardHasId) {
+                                        boolean wasSet = Utils.setCustomerId(options.getCustomerId());
+                                        if (wasSet) {
+                                            options.setModified(buildNo); // mark as updated
+                                            options.message = "Customer was registered Successfully";
+                                            options.read();// change operation so that it is detected by web app
+                                        } else {
+                                            options.setCustomerId("");
+                                            options.message = "Customer registration failed";
+                                        }
+                                    } else {
+                                        options.setCustomerId("");
+                                        options.message = "Customer ID unknown, register customer and try again";
+                                    }
                                     setStatusText(options.message);
                                     connection.editDoc(CARD_DOC_ID, options.toFirebase());
                                 }
+                                checkReaderStatus(); // update ui with card reader name
+                            } catch (Exception ex) {
+                                setStatusText(ex);
+                                options.message = Utils.getExceptionMessage(ex);
+                                options.setCustomerId("");
+                                try {
+                                    connection.editDoc(CARD_DOC_ID, options.toFirebase());
+                                } catch (Exception exp) {
+                                    setStatusText(Utils.getExceptionMessage(exp));
+                                }
                             }
-                            checkReaderStatus(); // update ui with card reader name
-                        } catch (Exception ex) {
-                            setStatusText(ex);
                         }
                     } else {
                         // first time program running
-                        CardOptions options = new CardOptions();
-                        options.message = "Loyalty Program Not Yet Used";
+                        options.message = "it must be the first time using Loyalty Program, try again";
                         try {
                             connection.editDoc(CARD_DOC_ID, options.toFirebase());
                             setStatusText(options.message);

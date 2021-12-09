@@ -27,8 +27,8 @@ Building An Executable App
 ----------
 - Replace the paths in the batch files with paths from your own file system i.e where the project is located
 - Rub pack.bat to create jar file for your app
-- Run link.bat(look at this file for more details) with OPTION 2 to create a custom runtime image
 - execute run-jar.bat and make sure the app runs before packaging it
+- Run link.bat(look at this file for more details) with OPTION 2 to create a custom runtime image
 - Run image.bat(look at this file for more details) to create an executable file for your app
 - Depending on the firebase authentication scheme you use, you might need to [register the application in firebase](https://console.cloud.google.com/apis/credentials)
 

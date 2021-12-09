@@ -5,6 +5,7 @@ Implementation-Vendor: Ripple Solutions(www.eripplesolutions.com)
 Implementation-Title: NFC card reader controller
 Implementation-Version: 1.0
 Main-Class: com.ripplesolutions.nfc.cardreader.Main
+Class-Path: /
 JavaFX-Version: 17.0.1
 Build-Jdk: 17.0.1
 

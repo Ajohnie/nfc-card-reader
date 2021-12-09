@@ -6,21 +6,23 @@ SET ALL_MODULE_PATH="C:\Program Files\BellSoft\LibericaNIK-Full-21-OpenJDK-17\jm
 SET MODULES=ALL-MODULE-PATH
 rem print-deps shows concise list
 SET OPERATION=list-deps
-rem SET OPERATION=print-module-deps
+rem --ignore-missing-deps
+rem SET OPERATION=print-module-deps --ignore-missing-deps
 SET DEP_LIST=target\deps-list.txt
 SET ACTION_DEP=jdeps --module-path=%ALL_MODULE_PATH%  --add-modules=%MODULES% --%OPERATION% %JAR_FILE%
 
 rem this file is relative to the paths specified
-SET MODULE_PATH=target\jre\lib-deps
+SET MODULE_PATH=target\lib-deps
 SET COPY_MODULES=Xcopy /E /I %ALL_MODULE_PATH% %MODULE_PATH%
 
-rem "C:Pserver\api\JAVA_PROJECTS\nfc-card-reader\target\jre"
-SET OUTPUT_PATH=--output target\jre
+rem "C:Pserver\api\JAVA_PROJECTS\nfc-card-reader\outjre"
+SET OUTPUT_PATH=--output out\jre
 SET LINK_OPTIONS= --no-header-files --no-man-pages --compress=2 --strip-debug
 rem get link modules after running %ACTION_DEP%
-SET LINK_MODULES= --add-modules  java.base,javafx.controls,javafx.fxml,javafx.graphics,java.logging
+SET LINK_MODULES= --add-modules  java.base,javafx.controls,javafx.fxml,javafx.base,javafx.graphics,java.logging,java.xml,java.smartcardio,java.net.http
 rem SET ACTION_LINK=jlink %LINK_OPTIONS% %LINK_MODULES% %OUTPUT_PATH% --module-path %MODULE_PATH%
-SET ACTION_LINK=jlink %LINK_OPTIONS% %LINK_MODULES% %OUTPUT_PATH%
+SET ACTION_LINK=jlink %LINK_OPTIONS% %LINK_MODULES% %OUTPUT_PATH% --module-path %MODULE_PATH%
+rem SET ACTION_LINK=jlink %LINK_OPTIONS% %LINK_MODULES% %OUTPUT_PATH%
 
 echo OPTION 1 -- generate a list of module dependencies for use by the --add-modules option
 echo OPTION 1.1 -- print out module dependencies
@@ -41,12 +43,14 @@ goto end
 
 :option1
 SET OPERATION=list-deps
+rem --ignore-missing-deps
 %ACTION_DEP%>>%DEP_LIST%
 echo list of module dependencies was stored in %DEP_LIST%
 goto end
 
 :option1.1
 SET OPERATION=print-module-deps
+rem --ignore-missing-deps
 %ACTION_DEP%>>%DEP_LIST%
 echo print out of module dependencies was stored in %DEP_LIST%
 goto end

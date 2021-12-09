@@ -4,13 +4,13 @@ rem no need for input dir for now, but you can put files to be shipped with the 
 rem like additional jar files etc
 SET INPUT_DIR="target\inputs"
 SET OUTPUT_DIR="target\outputs"
-SET JRE_DIR="target\jre"
+SET JRE_DIR="out\jre"
 SET APP_NAME="nfc-card-reader"
 SET MAIN_JAR_PATH="target"
 SET MAIN_JAR="nfc-card-reader-1.0-SNAPSHOT-jar-with-dependencies.jar"
 SET MAIN_CLASS="com.ripplesolutions.nfc.cardreader.Main"
 SET MODULE_PATH="%JAVA_HOME%/jmods"
-SET APP_MODULES=java.base,javafx.controls,javafx.graphics,java.datatransfer,java.desktop,java.scripting,java.xml
+SET APP_MODULES=java.base,javafx.controls,javafx.fxml,javafx.base,javafx.graphics,java.logging,java.xml,java.smartcardio,java.net.http
 rem -Xmx2048m
 SET JAVA_OPTIONS=""
 SET APP_DESCRIPTION="nfc card reader controller"

@@ -99,7 +99,7 @@
                      <children>
                         <HBox alignment="CENTER">
                            <children>
-                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="120.0" text="STATUS/REFRESH" textAlignment="CENTER">
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="139.0" text="CLICK TO SCAN CARD" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
