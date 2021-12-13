@@ -22,15 +22,15 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class NfcController implements Initializable {
-    // private static final String BRANCH = "MAKINDYE";
-    private static final String BRANCH = "KIRA_RD";
+    // private static final String BRANCH = "MAKINDYE"; // branch 2
+    private static final String BRANCH = "KIRA_RD"; // branch 1
     private static final String DATA_BASE_NAME = "vag";
     private static final String CARD_COL_NAME = "loyalty-programs";
     private static final String CARD_DOC_ID = "loyalty-program-" + BRANCH;
     private static final String COLOR_CARD_PRESENT = "green";
     private static final String COLOR_CARD_ABSENT = "#c5a70d";
     private static final String COLOR_READER_ABSENT = "black";
-    // added this to allow non-main thread messages to be shown
+    // added this to allow non-main thread messages to be shown and updating any interested subscribers like emailing/sms feature when card is read
     private final SimpleStringProperty appMessagesProperty = new SimpleStringProperty("");
     private final SimpleStringProperty readerNameProperty = new SimpleStringProperty("");
     private final SimpleStringProperty startStopIconColorProperty = new SimpleStringProperty("");
