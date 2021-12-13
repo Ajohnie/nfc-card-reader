@@ -17,8 +17,8 @@ public class Main extends Application {
     private static final String FXML_PATH = "launcher.fxml";
     private static final String CSS_PATH = "launcher.css";
     private static final String ICONS_PATH = "icons/";
-    // private static final String WINDOW_TITLE = "NFC CARD READER CONTROLLER";
-    private static final String WINDOW_TITLE = "NFC CARD READER CONTROLLER-DEV";
+    private static final String WINDOW_TITLE = "NFC CARD READER CONTROLLER"; // title for production version
+    // private static final String WINDOW_TITLE = "NFC CARD READER CONTROLLER-DEV"; // title for dev version
 
     public static void main(String[] args) {
         launch(args);
@@ -63,9 +63,9 @@ public class Main extends Application {
                     for (File f : iconList) {
                         stage.getIcons().add(new Image(f.toURI().toURL().openStream()));
                     }
-                    // System.out.println("ICONS NOT NULL");
+                    
                 }
-                // System.out.println("NOT NULL");
+            
             }
         } catch (Exception e) {
             System.out.println(Utils.getExceptionMessage(e));
