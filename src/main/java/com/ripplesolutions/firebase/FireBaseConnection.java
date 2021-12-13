@@ -17,8 +17,9 @@ import java.util.Map;
 import java.util.concurrent.Future;
 
 public class FireBaseConnection {
-    // private static final String SERVICE_ACCOUNT_KEY_PATH = "serviceAccountKey.json";
-    private static final String SERVICE_ACCOUNT_KEY_PATH = "serviceAccountKey-dev.json";
+    // put firebase service account key under /main/resources folder
+    private static final String SERVICE_ACCOUNT_KEY_PATH = "serviceAccountKey.json";
+    // private static final String SERVICE_ACCOUNT_KEY_PATH = "serviceAccountKey-dev.json";
     private final String dataBaseName;
     private Firestore db;
     private String collectionName;
