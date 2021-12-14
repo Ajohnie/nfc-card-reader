@@ -19,7 +19,8 @@ rem "C:Pserver\api\JAVA_PROJECTS\nfc-card-reader\outjre"
 SET OUTPUT_PATH=--output out\jre
 SET LINK_OPTIONS= --no-header-files --no-man-pages --compress=2 --strip-debug
 rem get link modules after running %ACTION_DEP%
-SET LINK_MODULES= --add-modules  java.base,javafx.controls,javafx.fxml,javafx.base,javafx.graphics,java.logging,java.xml,java.smartcardio,java.net.http
+rem SET LINK_MODULES= --add-modules  java.base,javafx.controls,javafx.fxml,javafx.base,javafx.graphics,java.logging,java.xml,java.smartcardio,java.net.http
+SET LINK_MODULES= --add-modules javafx.fxml,javafx.graphics,javafx.controls,javafx.base,java.smartcardio,com.jfoenix,google.cloud.firestore,google.cloud.core,com.google.auth.oauth2,firebase.admin,com.google.auth
 rem SET ACTION_LINK=jlink %LINK_OPTIONS% %LINK_MODULES% %OUTPUT_PATH% --module-path %MODULE_PATH%
 SET ACTION_LINK=jlink %LINK_OPTIONS% %LINK_MODULES% %OUTPUT_PATH% --module-path %MODULE_PATH%
 rem SET ACTION_LINK=jlink %LINK_OPTIONS% %LINK_MODULES% %OUTPUT_PATH%

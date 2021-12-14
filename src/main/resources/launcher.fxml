@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import io.github.palexdev.materialfx.font.MFXFontIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -42,7 +43,11 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                            <graphic>
-                              <MFXFontIcon description="mfx-minus" selectionFill="#c95c5c" />
+                              <ImageView fitHeight="10.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@baseline_minimize_black_48dp.png" />
+                                 </image>
+                              </ImageView>
                            </graphic>
                         </JFXButton>
                         <JFXButton fx:id="cancelBtn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" graphicTextGap="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="40.0" ripplerFill="WHITE" style="-fx-background-radius: 40;" textFill="WHITE">
@@ -50,7 +55,11 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                            <graphic>
-                              <MFXFontIcon description="mfx-x" selectionFill="#c95c5c" />
+                              <ImageView fitHeight="10.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@baseline_close_black_48dp.png" />
+                                 </image>
+                              </ImageView>
                            </graphic>
                         </JFXButton>
                      </children>
@@ -106,12 +115,16 @@
                               </Label>
                            </children>
                         </HBox>
-                        <JFXButton fx:id="startStopBtn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" graphicTextGap="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" ripplerFill="#c3bebe" style="-fx-background-radius: 100;" textFill="WHITE">
+                        <JFXButton fx:id="startStopBtn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" graphicTextGap="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" ripplerFill="#c3bebe" style="-fx-background-radius: 100; -fx-border-color: none; -fx-border-radius: 10; -fx-border-width: 10;" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                            <graphic>
-                              <MFXFontIcon fx:id="startStopIcon" description="mfx-sync-light" size="70.0" />
+                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@baseline_nfc_black_48dp.png" />
+                                 </image>
+                              </ImageView>
                            </graphic>
                         </JFXButton>
                      </children>

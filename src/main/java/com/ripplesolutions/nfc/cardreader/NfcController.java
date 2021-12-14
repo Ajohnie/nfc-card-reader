@@ -6,14 +6,12 @@ import com.ripplesolutions.firebase.CardOptions;
 import com.ripplesolutions.firebase.FireBaseConnection;
 import com.ripplesolutions.nfc.NFC;
 import com.ripplesolutions.utils.Utils;
-import io.github.palexdev.materialfx.font.MFXFontIcon;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -27,13 +25,13 @@ public class NfcController implements Initializable {
     private static final String DATA_BASE_NAME = "vag";
     private static final String CARD_COL_NAME = "loyalty-programs";
     private static final String CARD_DOC_ID = "loyalty-program-" + BRANCH;
-    private static final String COLOR_CARD_PRESENT = "green";
-    private static final String COLOR_CARD_ABSENT = "#c5a70d";
-    private static final String COLOR_READER_ABSENT = "black";
+    private static final String COLOR_CARD_PRESENT = "-fx-background-radius:10;-fx-border-color:green;-fx-border-radius:10;-fx-border-width:10";
+    private static final String COLOR_CARD_ABSENT = "-fx-background-radius:10;-fx-border-color:#c5a70d;-fx-border-radius:10;-fx-border-width:10";
+    private static final String COLOR_READER_ABSENT = "-fx-background-radius:10;-fx-border-color:none;-fx-border-radius:10;-fx-border-width:10";
     // added this to allow non-main thread messages to be shown and updating any interested subscribers like emailing/sms feature when card is read
     private final SimpleStringProperty appMessagesProperty = new SimpleStringProperty("");
     private final SimpleStringProperty readerNameProperty = new SimpleStringProperty("");
-    private final SimpleStringProperty startStopIconColorProperty = new SimpleStringProperty("");
+    private final SimpleStringProperty startStopButtonColorProperty = new SimpleStringProperty("");
     private FireBaseConnection connection;
     @FXML
     private Text statusText;
@@ -41,9 +39,6 @@ public class NfcController implements Initializable {
     private Label branchName, readerName;
     @FXML
     private JFXButton startStopBtn, exitBtn, cancelBtn, minimizeBtn;
-    @FXML
-    private MFXFontIcon startStopIcon;
-    // private FontAwesomeIconView startStopIcon;
     @FXML
     private ProgressBar progressBar;
 
@@ -74,7 +69,9 @@ public class NfcController implements Initializable {
         startStopBtn.setOnAction(event -> checkServer());
         appMessagesProperty.addListener((observable, oldValue, newValue) -> setStatusText(newValue));
         readerNameProperty.addListener((observable, oldValue, newValue) -> runLater(() -> readerName.setText(newValue)));
-        startStopIconColorProperty.addListener((observable, oldValue, newValue) -> runLater(() -> startStopIcon.setFill(Paint.valueOf(newValue))));
+        startStopButtonColorProperty.addListener((observable, oldValue, newValue) -> runLater(() -> {
+            startStopBtn.setStyle(newValue);
+        }));
 
         try {
             connection = new FireBaseConnection(DATA_BASE_NAME); // pass arguments to customize connection in future
@@ -186,14 +183,14 @@ public class NfcController implements Initializable {
         readerNameProperty.setValue(NFC.readerName);
         boolean readerPresent = NFC.readerPluggedIn;
         if (!readerPresent) {
-            startStopIconColorProperty.setValue(COLOR_READER_ABSENT);
+            startStopButtonColorProperty.setValue(COLOR_READER_ABSENT);
             return;
         }
         boolean cardPresent = NFC.cardInRange;
         if (cardPresent) {
-            startStopIconColorProperty.setValue(COLOR_CARD_PRESENT);
+            startStopButtonColorProperty.setValue(COLOR_CARD_PRESENT);
         } else {
-            startStopIconColorProperty.setValue(COLOR_CARD_ABSENT);
+            startStopButtonColorProperty.setValue(COLOR_CARD_ABSENT);
         }
     }
 }
