@@ -5,7 +5,7 @@
 - USB access is blocked from the web browser and NFC is not supported either except on android
 - It is based on the [JAVAFX app template](https://github.com/Ajohnie/demofx)
 
-![mage](https://github.com/Ajohnie/nfc-card-reader/git-hub-description.PNG)
+![mage](https://github.com/Ajohnie/nfc-card-reader/blob/master/git-hub-description.PNG)
 
 Installing
 ----------
