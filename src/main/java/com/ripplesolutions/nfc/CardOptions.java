@@ -1,6 +1,4 @@
-package com.ripplesolutions.firebase;
-
-import com.google.cloud.firestore.DocumentSnapshot;
+package com.ripplesolutions.nfc;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -17,12 +15,12 @@ public class CardOptions {
     private String modifiedBy;
     private String created;
 
-    public CardOptions(String customerId, String branch, long modified) {
+    public CardOptions(String customerId, String operation) {
         this.customerId = customerId;
-        this.branch = branch;
+        this.branch = "";
         this.id = this.getId();
-        this.modified = modified;
-        this.operation = "WRITE";
+        this.modified = 0;
+        this.operation = operation;
         this.message = "";
         this.addedBy = "card-reader";
         this.modifiedBy = "card-reader";
@@ -111,27 +109,6 @@ public class CardOptions {
         return map;
     }
 
-    public CardOptions fromFirebase(DocumentSnapshot snapshot) {
-        boolean configExists = snapshot != null && snapshot.exists();
-        if (!configExists) {
-            return this;
-        }
-        id = snapshot.getString("id");
-        customerId = snapshot.getString("customerId");
-        branch = snapshot.getString("branch");
-        try {
-            modified = snapshot.getLong("modified");
-        } catch (Exception e) {
-            modified = (new Date()).getTime();
-        }
-        operation = snapshot.getString("operation");
-        message = snapshot.getString("message");
-        addedBy = snapshot.getString("addedBy");
-        modifiedBy = snapshot.getString("modifiedBy");
-        created = snapshot.getString("created");
-        return this;
-    }
-
     public boolean hasId() {
         return this.customerId != null && this.customerId.length() > 0;
     }
@@ -156,5 +133,12 @@ public class CardOptions {
 
     public void setModified(Date now) {
         this.modified = (now).getTime();
+    }
+
+    public boolean isSimilarTo(String existingId) {
+        if (customerId.length() > existingId.length()) {
+            return customerId.trim().contains(existingId.trim());
+        }
+        return existingId.trim().contains(customerId.trim());
     }
 }

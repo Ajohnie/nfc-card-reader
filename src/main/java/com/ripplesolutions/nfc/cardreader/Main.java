@@ -17,8 +17,7 @@ public class Main extends Application {
     private static final String FXML_PATH = "launcher.fxml";
     private static final String CSS_PATH = "launcher.css";
     private static final String ICONS_PATH = "icons/";
-    // private static final String WINDOW_TITLE = "NFC CARD READER CONTROLLER"; // title for production version
-    private static final String WINDOW_TITLE = "NFC CARD READER CONTROLLER-DEV"; // title for dev version
+    private static final String WINDOW_TITLE = "NFC CARD READER CONTROLLER"; // title for production version
 
     public static void main(String[] args) {
         launch(args);

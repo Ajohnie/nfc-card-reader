@@ -7,10 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -24,7 +21,7 @@
                   <HBox prefHeight="40.0" prefWidth="295.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Text fill="STEELBLUE" strokeType="OUTSIDE" strokeWidth="0.0" text="RIPPLE SOLUTIONS" textAlignment="CENTER" />
-                        <Label text="© 2021" textFill="STEELBLUE" />
+                        <Label text="© 2022" textFill="STEELBLUE" />
                      </children>
                   </HBox>
                   <HBox prefHeight="40.0" prefWidth="232.0" visible="false">
@@ -68,47 +65,11 @@
             </HBox>
             <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                     <children>
-                        <GridPane VBox.vgrow="ALWAYS">
-                          <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="173.0" />
-                            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label prefHeight="17.0" prefWidth="120.0" text="BRANCH" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
-                                 <children>
-                                    <Label fx:id="branchName" alignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <Label prefHeight="17.0" prefWidth="120.0" text="READER NAME" GridPane.rowIndex="1" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <children>
-                                    <Label fx:id="readerName" wrapText="true" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </children>
-                  </VBox>
                   <VBox alignment="CENTER" HBox.hgrow="NEVER">
                      <children>
                         <HBox alignment="CENTER">
                            <children>
-                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="139.0" text="CLICK TO SCAN CARD" textAlignment="CENTER">
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="139.0" text="START/STOP" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -131,14 +92,20 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="580.0" VBox.vgrow="ALWAYS">
+            <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="72.0" prefWidth="473.0" VBox.vgrow="ALWAYS">
                <children>
                   <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="67.0" prefWidth="580.0" VBox.vgrow="ALWAYS">
                      <children>
                         <HBox alignment="BOTTOM_CENTER" HBox.hgrow="NEVER">
                            <children>
-                              <JFXButton fx:id="exitBtn" alignment="CENTER" buttonType="RAISED" prefHeight="25.0" prefWidth="100.0" ripplerFill="#ccd7d1" style="-fx-border-color: black;" text="EXIT" />
+                              <JFXButton fx:id="exitBtn" alignment="CENTER" buttonType="RAISED" prefHeight="25.0" prefWidth="100.0" ripplerFill="#ccd7d1" style="-fx-border-color: black;" text="EXIT">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin></JFXButton>
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </HBox>
                      </children>
                   </HBox>
@@ -150,7 +117,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Text>
-                  <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" minHeight="9.0" VBox.vgrow="NEVER">
+                  <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" minHeight="9.0" visible="false" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>

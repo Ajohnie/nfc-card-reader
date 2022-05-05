@@ -98,55 +98,54 @@ public final class NFC {
     }
 
     public static byte[] transmit(byte[] commands) throws Exception {
+        if (commands.length == 0) {
+            throw new Exception("Please Set Commands for the NFC reader and try again");
+        }
+        // show the list of available terminals
+        TerminalFactory factory = TerminalFactory.getDefault();
+        List<CardTerminal> terminals;
         try {
-            if (commands.length == 0) {
-                throw new Exception("Please Set Commands for the NFC reader and try again");
-            }
-            // show the list of available terminals
-            TerminalFactory factory = TerminalFactory.getDefault();
-            List<CardTerminal> terminals;
-            try {
-                terminals = factory.terminals().list();
-            } catch (Exception e) {
-                readerPluggedIn = false;
-                readerName = "";
-                throw new Exception("Please Connect NFC reader and try again");
-            }
-            boolean hasTerminals = terminals.size() > 0;
-            boolean hasManyTerminals = terminals.size() > 1;
-            if (hasManyTerminals) {
-                readerName = "";
-                readerPluggedIn = true;
-                cardInRange = false;
-                throw new Exception("Please connect Only one NFC reader to PC and try again");
-            }
-            if (hasTerminals) {
-                readerPluggedIn = true;
-                // get the first terminal
-                CardTerminal terminal = terminals.get(0);
-                readerName = terminal.getName();
-                // establish a connection with the card
-                if (terminal.isCardPresent()) {
-                    cardInRange = true;
-                    Card card = terminal.connect("*"); // T=1
-                    System.out.println(card.getATR().toString());
-                    CardChannel channel = card.getBasicChannel();
-                    ResponseAPDU r = channel.transmit(new CommandAPDU(commands));
-                    // disconnect
-                    card.disconnect(false);
-                    // System.out.println("GD: " + Arrays.toString(r.getBytes()) + "  GD2: " + Arrays.toString(r.getData()));
-                    return r.getBytes();
-                } else {
-                    throw new Exception("Please place loyalty card on the NFC reader and try again");
-                }
-            } else {
-                readerPluggedIn = false;
-                readerName = "";
-                throw new Exception("Please connect NFC reader to PC and try again");
-            }
-        } catch (Exception e) {
+            terminals = factory.terminals().list();
+        } catch (CardException e) {
+            e.printStackTrace();
+            readerPluggedIn = false;
+            readerName = "";
             cardInRange = false;
-            throw new Exception(e);
+            throw new Exception("Please Connect NFC reader and try again");
+        }
+        boolean hasTerminals = terminals.size() > 0;
+        boolean hasManyTerminals = terminals.size() > 1;
+        if (hasManyTerminals) {
+            readerName = "";
+            readerPluggedIn = true;
+            cardInRange = false;
+            throw new Exception("Please connect Only one NFC reader to PC and try again");
+        }
+        if (hasTerminals) {
+            readerPluggedIn = true;
+            // get the first terminal
+            CardTerminal terminal = terminals.get(0);
+            readerName = terminal.getName();
+            // establish a connection with the card
+            if (terminal.isCardPresent()) {
+                cardInRange = true;
+                Card card = terminal.connect("*"); // T=1
+                System.out.println(card.getATR().toString());
+                CardChannel channel = card.getBasicChannel();
+                ResponseAPDU r = channel.transmit(new CommandAPDU(commands));
+                // disconnect
+                card.disconnect(false);
+                // System.out.println("GD: " + Arrays.toString(r.getBytes()) + "  GD2: " + Arrays.toString(r.getData()));
+                return r.getBytes();
+            } else {
+                cardInRange = false;
+                throw new Exception("Please place loyalty card on the NFC reader and try again");
+            }
+        } else {
+            readerPluggedIn = false;
+            readerName = "";
+            cardInRange = false;
+            throw new Exception("Please connect NFC reader to PC and try again");
         }
     }
 }
