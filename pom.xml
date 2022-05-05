@@ -6,7 +6,7 @@
 
     <groupId>com.ripplesolutions</groupId>
     <artifactId>nfc-card-reader</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <name>nfc-card-reader</name>
     <properties>
         <!--build-->
@@ -29,38 +29,6 @@
         <!--jetty server-->
         <jetty.version>9.4.27.v20200227</jetty.version>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.cloud</groupId>
-                <artifactId>libraries-bom</artifactId>
-                <version>22.0.0</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.auth</groupId>
-                <artifactId>google-auth-library-bom</artifactId>
-                <version>1.3.0</version>
-                <type>pom</type>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.cloud</groupId>
-                <artifactId>google-cloud-core-bom</artifactId>
-                <version>2.1.0</version>
-                <type>pom</type>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.cloud</groupId>
-                <artifactId>google-cloud-firestore-bom</artifactId>
-                <version>3.0.2</version>
-                <type>pom</type>
-                <scope>compile</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <dependencies>
         <!--fix slf4j not found error-->
         <dependency>
@@ -68,41 +36,6 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.32</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.cloud</groupId>
-            <artifactId>google-cloud-firestore</artifactId>
-            <version>3.0.2</version>
-            <scope>compile</scope>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>com.google.cloud</groupId>
-            <artifactId>google-cloud-core</artifactId>
-            <version>2.1.0</version>
-            <scope>compile</scope>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>com.google.firebase</groupId>
-            <artifactId>firebase-admin</artifactId>
-            <version>8.1.0</version>
-            <scope>compile</scope>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>com.google.auth</groupId>
-            <artifactId>google-auth-library-oauth2-http</artifactId>
-            <version>1.3.0</version>
-            <scope>compile</scope>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>com.google.auth</groupId>
-            <artifactId>google-auth-library-credentials</artifactId>
-            <version>1.3.0</version>
-            <scope>compile</scope>
-            <type>jar</type>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.jfoenix/jfoenix -->
         <dependency>
@@ -127,7 +60,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-       <!--jetty server-->
+        <!--jetty server-->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
@@ -241,7 +174,7 @@
                 <configuration>
                     <mainClass>${java.build.mainClass}</mainClass>
                     <organizationEmail>info@eripplesolutions.com</organizationEmail>
-                    <version>1.0</version>
+                    <version>1.1</version>
                     <description>nfc card reader controller</description>
                     <displayName>NFC CARD READER CONTROLLER</displayName>
                     <generateInstaller>true</generateInstaller>
